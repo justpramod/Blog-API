@@ -18,6 +18,7 @@ https://blog-api-uenr.onrender.com
 - Create, read, update, delete posts
 - Comment on posts
 - Ownership protection (users can only edit/delete their own posts and comments)
+- Built-in single-page frontend served from the same Express app
 
 ## API Endpoints
 
@@ -57,10 +58,13 @@ npm install
 ```
 ### Environmental Variables
 Create a '.env' file: 
-MONTO_URI = your_mongodb_connection_string
+MONGO_URI = your_mongodb_connection_string
 JWT_SECRET = your_secret_key
 
 ### Run
 ```bash
 npm start
 ```
+
+### Frontend
+Open `http://localhost:3000` after starting the server. The UI lets you register, log in, manage your posts, and inspect comments without a separate frontend build step.

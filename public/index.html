@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog API Studio</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="backdrop backdrop-a"></div>
+  <div class="backdrop backdrop-b"></div>
+  <div class="backdrop backdrop-c"></div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Blog API control room</p>
+      <h1>Give the backend a front door.</h1>
+      <p class="hero-text">
+        Sign in, write posts, inspect comments, and keep the whole API in one place.
+      </p>
+    </div>
+    <div class="hero-card glass">
+      <div class="hero-card-label">Session</div>
+      <div id="authStatus" class="hero-card-title">Not signed in</div>
+      <div class="hero-card-text">Use the login tab to unlock your workspace.</div>
+      <div class="hero-card-actions">
+        <button id="refreshBtn" class="secondary-btn" type="button" hidden>Refresh data</button>
+        <button id="signOutBtn" class="ghost-btn" type="button" hidden>Sign out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-grid">
+    <section class="surface glass auth-surface">
+      <div class="surface-head">
+        <div>
+          <p class="section-kicker">Access</p>
+          <h2>Get into the workspace</h2>
+        </div>
+        <div class="tab-switcher" role="tablist" aria-label="Authentication mode">
+          <button class="tab active" type="button" data-auth-tab="login">Login</button>
+          <button class="tab" type="button" data-auth-tab="register">Register</button>
+        </div>
+      </div>
+
+      <form id="loginForm" class="auth-form" autocomplete="on">
+        <label>
+          <span>Username</span>
+          <input name="username" type="text" placeholder="pramod" required />
+        </label>
+        <label>
+          <span>Password</span>
+          <input name="password" type="password" placeholder="Your password" required />
+        </label>
+        <button class="primary-btn" type="submit">Login</button>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden" autocomplete="on">
+        <label>
+          <span>Username</span>
+          <input name="username" type="text" placeholder="new author" required />
+        </label>
+        <label>
+          <span>Password</span>
+          <input name="password" type="password" placeholder="Choose a password" required />
+        </label>
+        <button class="primary-btn" type="submit">Create account</button>
+      </form>
+
+      <p class="supporting-copy">
+        The API uses JWT auth, so your session stays local to this browser until you sign out.
+      </p>
+    </section>
+
+    <section class="surface glass workspace-surface">
+      <div class="surface-head">
+        <div>
+          <p class="section-kicker">Editor</p>
+          <h2 id="postFormTitle">Write a post</h2>
+        </div>
+        <span id="postsCount" class="pill">0 posts</span>
+      </div>
+
+      <p id="workspaceHint" class="empty-state compact">Log in to load your posts and start editing.</p>
+
+      <form id="postForm" class="editor-form">
+        <input type="hidden" name="postId" />
+        <label>
+          <span>Title</span>
+          <input name="title" type="text" placeholder="A post worth reading" required />
+        </label>
+        <label>
+          <span>Body</span>
+          <textarea name="body" rows="8" placeholder="Tell the story here" required></textarea>
+        </label>
+        <div class="form-actions">
+          <button class="primary-btn" type="submit">Publish post</button>
+          <button id="clearPostFormBtn" class="ghost-btn" type="button">Clear</button>
+        </div>
+      </form>
+
+      <div id="postsList" class="stack"></div>
+    </section>
+
+    <section class="surface glass detail-surface">
+      <div class="surface-head">
+        <div>
+          <p class="section-kicker">Reader</p>
+          <h2>Selected post</h2>
+        </div>
+        <span class="pill subtle">Comments</span>
+      </div>
+
+      <article id="selectedPostCard" class="selected-post empty-state">
+        Pick a post to inspect the full thread.
+      </article>
+
+      <form id="commentForm" class="comment-form">
+        <label>
+          <span>Add a comment</span>
+          <textarea name="text" rows="4" placeholder="Leave a note for the thread" required></textarea>
+        </label>
+        <button class="primary-btn" type="submit">Send comment</button>
+      </form>
+
+      <div class="section-headline">
+        <h3>Thread</h3>
+        <span id="commentsCount" class="pill subtle">0 comments</span>
+      </div>
+      <div id="commentsList" class="stack"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+
+</html>
